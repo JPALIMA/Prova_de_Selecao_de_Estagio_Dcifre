@@ -1,5 +1,4 @@
-from pydantic import BaseModel
-#from typing import List, Optional
+from pydantic import BaseModel, ConfigDict
 
 class EmpresaBase(BaseModel):
     nome: str
@@ -11,20 +10,20 @@ class EmpresaBase(BaseModel):
 class EmpresaCreate(EmpresaBase):
     pass
 
-class EmpresaResponse(EmpresaBase):
+class Empresa(EmpresaBase):
     id: int
-    class Config:
-        from_attributes = True
 
-class ObrigacaoBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)  # Substitui orm_mode=True
+
+class ObrigacaoAcessoriaBase(BaseModel):
     nome: str
     periodicidade: str
     empresa_id: int
 
-class ObrigacaoCreate(ObrigacaoBase):
+class ObrigacaoAcessoriaCreate(ObrigacaoAcessoriaBase):
     pass
 
-class ObrigacaoResponse(ObrigacaoBase):
+class ObrigacaoAcessoria(ObrigacaoAcessoriaBase):
     id: int
-    class Config:
-        from_attributes = True
+
+    model_config = ConfigDict(from_attributes=True)  # Substitui orm_mode=True
